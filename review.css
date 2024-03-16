@@ -1,0 +1,144 @@
+/* Styles for the review page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+  color: #fff;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-outline-light {
+  background-color: #fff;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.btn-outline-light:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.reviewpage {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #414141;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.review-container {
+  margin-top: 20px;
+}
+
+.question-box {
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-color: #444;
+  color:#000;
+  font-size: 15px;
+  font-weight: 550;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) ;
+}
+.question-box:hover {
+  background-color: #555;
+  cursor: pointer;
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgb(0, 0, 0,0.3), 0 0 0 2px #fff; /* White box shadow */
+}
+.question-box h3 {
+  margin-top: 0;
+  color: #fff;
+  font-weight: 300;
+}
+
+.graph-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f2f2f2; /* Change the background color to a suitable color */
+  border-radius: 10px;
+  width: 80%; /* Decreased width */
+  box-shadow: 0 4px 8px rgb(0, 0, 0,0.3), 0 0 0 2px #fff; /* White box shadow */
+  
+}
+
+.graph-container canvas {
+  width: 100%;
+  /* transform: scale(1.02); */
+
+}
+
+
+/* Hover effect */
+.question-box:hover {
+  background-color: #555;
+  cursor: pointer;
+}
+/* Styles for the review page */
+
+#home-btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#home-btn, #download-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#home-btn {
+  background-color: #fff;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+#home-btn:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#download-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+#download-btn:hover {
+  background-color: #218838;
+}
