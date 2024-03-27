@@ -1,5 +1,8 @@
-
 const analyzeBtn = document.getElementById("analyze-btn");
+const graphContainer = document.getElementById('graph');
+const correctQuestionsContainer = document.getElementById('correct-questions');
+const wrongQuestionsContainer = document.getElementById('wrong-questions');
+
 analyzeBtn.addEventListener("click", () => {
     const getUserActivity = (userEmail) => {
         
@@ -23,10 +26,7 @@ analyzeBtn.addEventListener("click", () => {
 
     const displayUserActivity = (userEmail) => {
         const userData = getUserActivity(userEmail);
-        const correctQuestionsContainer = document.getElementById('correct-questions');
-        const wrongQuestionsContainer = document.getElementById('wrong-questions');
-        const graphContainer = document.getElementById('graph');
-
+     
         if (userData && userData[userEmail] && userData[userEmail]['AOA_level2'] && userData[userEmail]['AOA_level2']['level2'] && userData[userEmail]['AOA_level2']['level2'].questions && userData[userEmail]['AOA_level2']['level2'].questions.length > 0) {
             let totalCorrect = 0;
             let totalWrong = 0;
@@ -92,3 +92,106 @@ const homeBtn = document.getElementById("home-btn");
 homeBtn.addEventListener("click", () => {
     window.location.href = "../subject.html";
 });
+
+// Event listener for download button
+const downloadBtn = document.getElementById("download-btn");
+downloadBtn.addEventListener("click", () => {
+    const canvas = document.getElementById('graph');
+    const imageURL = canvas.toDataURL('image/png');
+
+    const link = document.createElement('a');
+    link.href = imageURL;
+    link.download = 'quiz_results.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
+// Event listener for share button (Facebook)
+const shareBtn = document.getElementById("share-btn");
+shareBtn.addEventListener("click", () => {
+    shareAchievement('facebook');
+});
+
+// Event listener for share button (WhatsApp)
+const shareWhatsAppBtn = document.getElementById("share-whatsapp-btn");
+shareWhatsAppBtn.addEventListener("click", () => {
+    shareAchievement('whatsapp');
+});
+
+// Event listener for share button (Instagram)
+const shareInstagramBtn = document.getElementById("share-instagram-btn");
+shareInstagramBtn.addEventListener("click", () => {
+    shareAchievement('instagram');
+});
+
+// Event listener for share button (LinkedIn)
+const shareLinkedInBtn = document.getElementById("share-linkedin-btn");
+shareLinkedInBtn.addEventListener("click", () => {
+    shareAchievement('linkedin');
+});
+
+// Event listener for share via email button
+const shareEmailBtn = document.getElementById("share-email-btn");
+shareEmailBtn.addEventListener("click", () => {
+    sendEmail();
+});
+
+// Function to share achievement on social media
+const shareAchievement = (platform) => {
+    let shareURL = 'https://example.com/share'; // Replace with your actual share URL or content
+
+    // Customize the share URL based on the selected platform
+    switch (platform) {
+        case 'facebook':
+            shareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareURL)}`;
+            break;
+        case 'whatsapp':
+            shareURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareURL)}`;
+            break;
+        case 'instagram':
+            shareURL = `https://www.instagram.com/sharer.php?u=${encodeURIComponent(shareURL)}`;
+            break;
+        case 'linkedin':
+            shareURL = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareURL)}`;
+            break;
+        default:
+            // Default to the generic share URL
+            break;
+    }
+
+    // Open a new window with the share URL or use social media APIs for sharing
+    window.open(shareURL, '_blank');
+};
+
+// Function to send email with quiz results
+const sendEmail = () => {
+    const userEmailData = JSON.parse(localStorage.getItem(userEmail));
+    const userEmailContent = JSON.stringify(userEmailData[userEmail]['quick-quiz'].questions, null, 4);
+
+    // Send email using your email service provider's API or backend server
+    // This is just a placeholder and won't actually send an email
+
+    fetch('https://api.youremailprovider.com/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            to: userEmail, // User's email address
+            subject: 'Quiz Results',
+            body: userEmailContent // JSON content of quiz results
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Email sent successfully!');
+        } else {
+            alert('Failed to send email. Please try again later.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send email. Please try again later.');
+    });
+}
